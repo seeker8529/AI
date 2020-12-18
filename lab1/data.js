@@ -14,7 +14,7 @@ let treedata = {
                     children: [
                         {
                             name: "iPhone XR",
-                            diagonal: 6.1,
+                            diagonal_mm: 6.1,
                             working_time: 65,
                             price: 47290,
                             case_material: "aluminum & glass",
@@ -25,7 +25,7 @@ let treedata = {
                         },
                         {
                             name: "iPhone SE",
-                            diagonal: 4.7,
+                            diagonal_mm: 4.7,
                             price: 35789,
                             working_time: 40,
                             case_material: "aluminum",
@@ -37,7 +37,7 @@ let treedata = {
                         /*
                         {
                             name: "iPhone 11",
-                            diagonal: 6.1,
+                            diagonal_mm: 6.1,
                             price: 64980,
                             working_time: 65,
                             case_material: "aluminum & glass",
@@ -48,7 +48,7 @@ let treedata = {
                         },
                         {
                             name: "iPhone 11 Pro",
-                            diagonal: 5.8,
+                            diagonal_mm: 5.8,
                             price: 92900,
                             working_time: 65,
                             case_material: "aluminum",
@@ -59,7 +59,7 @@ let treedata = {
                         },
                         {
                             name: "iPhone 11 Pro Max",
-                            diagonal: 6.5,
+                            diagonal_mm: 6.5,
                             price: 84389,
                             working_time: 80,
                             case_material: "aluminum",
@@ -70,7 +70,7 @@ let treedata = {
                         },
                         {
                             name: "iPhone 12",
-                            diagonal: 6.5,
+                            diagonal_mm: 6.5,
                             price: 84389,
                             working_time: 80,
                             case_material: "aluminum & matt glass",
@@ -81,7 +81,7 @@ let treedata = {
                         },
                         {
                             name: "iPhone 12 mini",
-                            diagonal: 5.4,
+                            diagonal_mm: 5.4,
                             price: 69990,
                             working_time: 80,
                             case_material: "aluminum & matt glass",
@@ -92,7 +92,7 @@ let treedata = {
                         },
                         {
                             name: "iPhone 12 Pro",
-                            diagonal: 6.1,
+                            diagonal_mm: 6.1,
                             price: 99990,
                             working_time: 80,
                             case_material: "aluminum & matt glass",
@@ -103,7 +103,7 @@ let treedata = {
                         },
                         {
                             name: "iPhone 12 Pro Max",
-                            diagonal: 6.7,
+                            diagonal_mm: 6.7,
                             price: 109990,
                             working_time: 80,
                             case_material: "aluminum & matt glass",
@@ -260,7 +260,7 @@ let treedata = {
                          children: [
                              {
                                 name: "Galaxy Z Flip",
-                                diagonal: 6.7,
+                                diagonal_mm: 6.7,
                                 price: 179990,
                                 working_time: 35,
                                 case_material: "aluminum",
@@ -272,7 +272,7 @@ let treedata = {
                              },
                              {
                                 name: "Galaxy Fold",
-                                diagonal: 5.8,
+                                diagonal_mm: 5.8,
                                 price: 159900,
                                 working_time: 65,
                                 case_material: "aluminum",
@@ -284,7 +284,7 @@ let treedata = {
                             },
                             {
                                 name: "Galaxy Z Fold2",
-                                diagonal: 7.6,
+                                diagonal_mm: 7.6,
                                 price: 179990,
                                 working_time: 31,
                                 case_material: "aluminum",
@@ -300,7 +300,7 @@ let treedata = {
                          children: [
                             {
                                 display_alw_on: true,
-                                diagonal: 7.6,
+                                diagonal_mm: 7.6,
                                 price: 179990,
                                 working_time: 31,
                                 case_material: "aluminum",
@@ -316,7 +316,7 @@ let treedata = {
                          children: [
                             {
                                 display_alw_on: true,
-                                diagonal_mm: 40,
+                                diagonal_mm_mm: 40,
                                 case_material: "aluminum",
                                 use_with: "Apple only"
 
@@ -328,7 +328,7 @@ let treedata = {
                          children: [
                             {
                                 display_alw_on: true,
-                                diagonal_mm: 40,
+                                diagonal_mm_mm: 40,
                                 case_material: "aluminum",
                                 use_with: "Apple only"
 
@@ -373,7 +373,7 @@ let treedata = {
                         children: [
                             {
                                 name: "Mi 10T Pro",
-                                diagonal: 6.67,
+                                diagonal_mm: 6.67,
                                 price: 49990,
                                 working_time: 39,
                                 case_material: "aluminum",
@@ -384,7 +384,7 @@ let treedata = {
                             },
                             {
                                 name: "Mi 10T",
-                                diagonal: 6.67,
+                                diagonal_mm: 6.67,
                                 price: 44990,
                                 working_time: 39,
                                 case_material: "aluminum",
@@ -395,7 +395,7 @@ let treedata = {
                             },
                             {
                                 name: "Mi Note 10 Lite",
-                                diagonal: 6.67,
+                                diagonal_mm: 6.67,
                                 price: 32990,
                                 working_time: 24,
                                 case_material: "aluminum",
@@ -406,7 +406,7 @@ let treedata = {
                             },
                             {
                                 name: "Mi 10",
-                                diagonal: 6.67,
+                                diagonal_mm: 6.67,
                                 price: 64990,
                                 working_time: 39,
                                 case_material: "aluminum",
@@ -417,7 +417,7 @@ let treedata = {
                             },
                             {
                                 name: "Mi A3",
-                                diagonal: 6.088,
+                                diagonal_mm: 6.088,
                                 price: 14990,
                                 working_time: 23,
                                 case_material: "aluminum",
@@ -428,7 +428,7 @@ let treedata = {
                             },
                             {
                                 name: "Mi 9",
-                                diagonal: 6.39,
+                                diagonal_mm: 6.39,
                                 price: 25990,
                                 working_time: 27,
                                 case_material: "aluminum",
@@ -439,7 +439,7 @@ let treedata = {
                             },
                             {
                                 name: "Mi 8",
-                                diagonal: 6.21,
+                                diagonal_mm: 6.21,
                                 price: 25990,
                                 working_time: 33,
                                 case_material: "aluminum",
@@ -457,7 +457,7 @@ let treedata = {
                         children: [
                             {
                                 name: "Redmi 9",
-                                diagonal: 6.53,
+                                diagonal_mm: 6.53,
                                 price: 10990,
                                 working_time: 30,
                                 case_material: "aluminum",
@@ -468,7 +468,7 @@ let treedata = {
                             },
                             {
                                 name: "Redmi 8",
-                                diagonal: 6.22,
+                                diagonal_mm: 6.22,
                                 price: 9990,
                                 working_time: 28,
                                 case_material: "aluminum",
@@ -479,7 +479,7 @@ let treedata = {
                             },
                             {
                                 name: "Redmi 7",
-                                diagonal: 6.53,
+                                diagonal_mm: 6.53,
                                 price: 5990,
                                 working_time: 30,
                                 case_material: "aluminum",
@@ -490,7 +490,7 @@ let treedata = {
                             },
                             {
                                 name: "Redmi Note 9",
-                                diagonal: 6.22,
+                                diagonal_mm: 6.22,
                                 price: 14990,
                                 working_time: 31,
                                 case_material: "aluminum",
@@ -501,7 +501,7 @@ let treedata = {
                             },
                             {
                                 name: "Redmi Note 9 Pro",
-                                diagonal: 6.67,
+                                diagonal_mm: 6.67,
                                 price: 23990,
                                 working_time: 35,
                                 case_material: "aluminum",
@@ -512,7 +512,7 @@ let treedata = {
                             },
                             {
                                 name: "Redmi Note 8 Pro",
-                                diagonal: 6.53,
+                                diagonal_mm: 6.53,
                                 price: 19990,
                                 working_time: 30,
                                 case_material: "aluminum",

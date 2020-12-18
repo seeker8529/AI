@@ -1,4 +1,4 @@
- let width = 1500;
+ let width = 1800;
  let data = treedata;
  let list_t = [];
  var sum = 0;
@@ -6,8 +6,8 @@
 
  let tree = data => {
   const root = d3.hierarchy(data);
-  root.dx = 30;
-  root.dy = width / (root.height + 1);
+  root.dx = 70;
+  root.dy = 350;
   return d3.tree().nodeSize([root.dx, root.dy])(root);
   }
 
@@ -42,6 +42,25 @@
   return (a, b) => a[field] < b[field] ? -1 : 1;
  }
 
+ // Поиск по листьям по имени - возвращает лист дерева(структурой), если он найден
+ function find_by_name(name, tree_root) {
+   let t = tree_root;
+   let res;
+
+   if (Array.isArray(t.children)){
+     for (let i = 0; i < t.children.length; i++)
+       if(res === undefined)
+         res = find_by_name(name, t.children[i]);
+   }
+   else {
+     if (name === t.data.name){
+       res = t;
+     }
+   }
+   return(res);
+ }
+
+
  //Поиск евклидова расстояния между двумя листьями
  function evklid(x, y){
   let f_x = get_features(x);
@@ -65,7 +84,7 @@
 
  //Находит список объектов, сортированных по евклидову расстоянию от одного объекта x
  function evklid_list(x, tree, list){
-  var leave = {name:"", evklid:0};
+  var leave = {name:"", val:0};
   let t=tree;
 
   if(Array.isArray(t.children))
@@ -73,7 +92,7 @@
     evklid_list(x, t.children[i], list);
   else{
    leave.name = t.data.name;
-   leave.evklid = evklid(x, t);
+   leave.val = evklid(x, t);
    list.push(leave);
   }
  }
@@ -94,9 +113,7 @@
 
  //Находит список объектов, сортированных по удаленности от одного объекта d
  function proximity_list(d, list, proximity_it) {
-
   let p = d.parent;
-
   proximity_it++;
 
    if(p && Array.isArray(p.children)){
@@ -112,7 +129,7 @@
    if (p)
     proximity_list(p, list, proximity_it);
    else
-    list.sort(byField('proximity_it'));
+    list.sort(byField('val'));
  }
 
 
@@ -125,7 +142,7 @@
     near(child.children[j], list, proximity_it);
   }
   else
-     list.push({name:child.data.name, proximity:proximity_it});
+     list.push({name:child.data.name, val:proximity_it});
  }
 
 
@@ -137,7 +154,7 @@
     for (let i = 0; i < t.children.length; i++)
      differences_list(x, t.children[i], list);
    else{
-    list.push({name: t.data.name, differences_count: count_differences(x, t)});
+    list.push({name: t.data.name, val: count_differences(x, t)});
    }
    //console.log(list.sort(byField('differences_count')));
  }
@@ -223,7 +240,7 @@
     for (let i = 0; i < t.children.length; i++)
      correlation_list(x, t.children[i], list);
    else{
-    list.push({name: t.data.name, correlation_coef: correlation(x, t, root)});
+    list.push({name: t.data.name, val: correlation(x, t, root)});
    }
  }
 
@@ -313,6 +330,7 @@
       .attr("r", 2.5);
 
   node.append("text")
+      .attr("font-size", "13")
       .attr("dy", "0.35em")
       .attr("x", d => d.children ? -6 : 6)
       .attr("text-anchor", d => d.children ? "end" : "start")
@@ -321,6 +339,7 @@
       .attr("stroke", "white");
 
   node.append("text")
+    .attr("font-size", "12")
     .attr("dy", "2.35em")
     .attr("x", d => d.children ? -6 : 6)
     .attr("text-anchor", d => d.children ? "end" : "start")
@@ -329,10 +348,11 @@
     .attr("stroke", "white");
 
   node.append("text")
-    .attr("dy", "3.35em")
+    .attr("font-size", "12")
+    .attr("dy", "4.35em")
     .attr("x", d => d.children ? -6 : 6)
     .attr("text-anchor", d => d.children ? "end" : "start")
-    .text(d => get_atr(d.data.diagonal, "Диагональ:"))
+    .text(d => get_atr(d.data.diagonal_mm, "Диагональ:"))
   .clone(true).lower()
     .attr("stroke", "white");
 
