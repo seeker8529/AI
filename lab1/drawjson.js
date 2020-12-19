@@ -6,8 +6,8 @@
 
  let tree = data => {
   const root = d3.hierarchy(data);
-  root.dx = 70;
-  root.dy = 350;
+  root.dx = 110;
+  root.dy = 400;
   return d3.tree().nodeSize([root.dx, root.dy])(root);
   }
 
@@ -331,12 +331,22 @@
 
   node.append("text")
       .attr("font-size", "13")
+      .attr("font-weight", "bold")
       .attr("dy", "0.35em")
       .attr("x", d => d.children ? -6 : 6)
       .attr("text-anchor", d => d.children ? "end" : "start")
       .text(d => d.data.name)
     .clone(true).lower()
       .attr("stroke", "white");
+
+  node.append("text")
+    .attr("font-size", "12")
+    .attr("dy", "1.35em")
+    .attr("x", d => d.children ? -6 : 6)
+    .attr("text-anchor", d => d.children ? "end" : "start")
+    .text(d => get_atr(d.data.rating, "Рейтинг:"))
+  .clone(true).lower()
+    .attr("stroke", "white");
 
   node.append("text")
     .attr("font-size", "12")
@@ -349,12 +359,85 @@
 
   node.append("text")
     .attr("font-size", "12")
-    .attr("dy", "4.35em")
+    .attr("dy", "3.35em")
     .attr("x", d => d.children ? -6 : 6)
     .attr("text-anchor", d => d.children ? "end" : "start")
     .text(d => get_atr(d.data.diagonal_mm, "Диагональ:"))
   .clone(true).lower()
     .attr("stroke", "white");
+
+  node.append("text")
+    .attr("font-size", "12")
+    .attr("dy", "4.35em")
+    .attr("x", d => d.children ? -6 : 6)
+    .attr("text-anchor", d => d.children ? "end" : "start")
+    .text(d => get_atr(d.data.working_time, "Время автономной работы, ч:"))
+  .clone(true).lower()
+    .attr("stroke", "white");
+
+  node.append("text")
+    .attr("font-size", "12")
+    .attr("dy", "5.35em")
+    .attr("x", d => d.children ? -6 : 6)
+    .attr("text-anchor", d => d.children ? "end" : "start")
+    .text(d => get_atr(d.data.case_material, "Материал корпуса:"))
+  .clone(true).lower()
+    .attr("stroke", "white");
+
+  node.append("text")
+    .attr("font-size", "12")
+    .attr("dy", "6.35em")
+    .attr("x", d => d.children ? -6 : 6)
+    .attr("text-anchor", d => d.children ? "end" : "start")
+    .text(d => get_atr(d.data.weight_gr, "Вес:"))
+  .clone(true).lower()
+    .attr("stroke", "white");
+
+  node.append("text")
+    .attr("font-size", "12")
+    .attr("dy", "7.35em")
+    .attr("x", d => d.children ? -6 : 6)
+    .attr("text-anchor", d => d.children ? "end" : "start")
+    .text(d => get_atr(d.data.display_alw_on, "Всегда активный дисплей:"))
+  .clone(true).lower()
+    .attr("stroke", "white");
+
+  node.append("text")
+    .attr("font-size", "12")
+    .attr("dy", "6.35em")
+    .attr("x", d => d.children ? -6 : 6)
+    .attr("text-anchor", d => d.children ? "end" : "start")
+    .text(d => get_atr(d.data.use_with, "Совместимость:"))
+  .clone(true).lower()
+    .attr("stroke", "white");
+
+  node.append("text")
+    .attr("font-size", "12")
+    .attr("dy", "7.35em")
+    .attr("x", d => d.children ? -6 : 6)
+    .attr("text-anchor", d => d.children ? "end" : "start")
+    .text(d => get_atr(d.data.sim_2, "Поддержка 2 сим:"))
+  .clone(true).lower()
+    .attr("stroke", "white");
+
+  node.append("text")
+    .attr("font-size", "12")
+    .attr("dy", "3.35em")
+    .attr("x", d => d.children ? -6 : 6)
+    .attr("text-anchor", d => d.children ? "end" : "start")
+    .text(d => get_atr(d.data.height_mm, "Высота, мм:"))
+  .clone(true).lower()
+    .attr("stroke", "white");
+
+  node.append("text")
+    .attr("font-size", "12")
+    .attr("dy", "5.35em")
+    .attr("x", d => d.children ? -6 : 6)
+    .attr("text-anchor", d => d.children ? "end" : "start")
+    .text(d => get_atr(d.data.is_vacuum, "Ваккуумные:"))
+  .clone(true).lower()
+    .attr("stroke", "white");
+
 
   console.log("------- avg --------");
   console.log(find_avg("price", root));

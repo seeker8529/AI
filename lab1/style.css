@@ -42,8 +42,8 @@ input{
 
 .tree{
     position: absolute;
-    top: -1000px;
-    left: -10px;
+    top: 100px;
+    left: 100px;
 }
 
 .main{
@@ -57,4 +57,13 @@ input{
     top: 100px;
     left: 500px;
 }
+
+.back{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.tree   { z-index: 100; }
+.back   { z-index: 10; }
 
