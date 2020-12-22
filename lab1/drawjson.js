@@ -1,4 +1,4 @@
- let width = 1800;
+ let width = 5000;
  let data = treedata;
  let list_t = [];
  var sum = 0;
@@ -7,7 +7,7 @@
  let tree = data => {
   const root = d3.hierarchy(data);
   root.dx = 110;
-  root.dy = 400;
+  root.dy = 600;
   return d3.tree().nodeSize([root.dx, root.dy])(root);
   }
 
@@ -111,6 +111,16 @@
   }
  }
 
+ //Находит степень удаленности х от у по дереву
+ function count_proximity(x, y){
+  var list = [];
+  proximity_list(x, list, 0);
+  if (list[list.findIndex(el => el.name === y.data.name)] != undefined)
+   return list[list.findIndex(el => el.name === y.data.name)].val;
+  return 0;
+ }
+
+
  //Находит список объектов, сортированных по удаленности от одного объекта d
  function proximity_list(d, list, proximity_it) {
   let p = d.parent;
@@ -159,6 +169,7 @@
    //console.log(list.sort(byField('differences_count')));
  }
 
+
  //Находит количество отличий между объектами x и y
   function count_differences(x, y){
   let features_x = get_features(x);
@@ -185,10 +196,12 @@
    return diff_sum;
  }
 
+
  //Получает характеристики товаров (исключая имя - идентификатор)
  function get_features(x){
     return Object.keys(x.data).filter((n) => {return n != "name"});
  }
+
 
  //Получает список объектов, сортированных по количеству отличий для каждого листа
  function call_differences_list(tree){
@@ -204,6 +217,7 @@
   }
  }
 
+
  //Получает список объектов, сортированных по близости для каждого листа
   function call_proximity_list(tree){
   let t=tree;
@@ -217,7 +231,6 @@
    console.log(t.data.name, list);
   }
  }
-
 
   //Получает список объектов с коэффициентами корелляций для каждого листа
   function call_correlation_list(tree){
@@ -233,6 +246,7 @@
   }
  }
 
+
  function correlation_list(x, tree, list){
   let t = tree;
 
@@ -243,6 +257,7 @@
     list.push({name: t.data.name, val: correlation(x, t, root)});
    }
  }
+
 
  function correlation(x, y, tree){
   let f_x = get_features(x);
@@ -275,6 +290,7 @@
   return coef;
  }
 
+
  //Находит значения поля в дереве и записывает в лист
  function count_feature_val(feature, tree, list){
   let t = tree;
@@ -289,11 +305,44 @@
   }
  }
 
+
  //Находит среднее значение поля во всем дереве
   function find_avg(feature, tree){
    let list = [];
    count_feature_val(feature, tree, list);
    return list.reduce((a, b) => (a + b)) / list.length;
+ }
+
+
+  //Получает список объектов, сортированных по близости для каждого листа
+  function call_recommendation_list(tree){
+  let t=tree;
+  let list = [];
+
+  if(Array.isArray(t.children))
+   for(let i=0; i<t.children.length; i++)
+    call_recommendation_list(t.children[i]);
+  else{
+   recommendation_list(t, root, list);
+   //console.log(t.data.name, list.sort(byField('val')));
+  }
+ }
+
+
+ //Находит близость расположения объектов к объекту x и записывает в лист
+ function recommendation_list(x, tree, list){
+
+   let t = tree;
+   if(Array.isArray(t.children))
+    for (let i = 0; i < t.children.length; i++)
+     recommendation_list(x, t.children[i], list);
+   else
+    list.push({name: t.data.name, val:recommend_coeff(x,t)});
+ }
+
+
+ function recommend_coeff(x,y){
+  return ((-10)*correlation(x,y,root) + 8*count_differences(x,y) + 0.0001*evklid(x,y) + 5*count_proximity(x,y));
  }
 
   var bodySelection = d3.select("body");
@@ -440,19 +489,19 @@
 
 
   console.log("------- avg --------");
-  console.log(find_avg("price", root));
+//  console.log(find_avg("price", root));
 
 
   console.log("-------DIFFERENCES LISTS--------");
-  call_differences_list(root);
+//  call_differences_list(root);
 
   console.log("-------PROXIMITY LISTS--------");
-  call_proximity_list(root);
+//  call_proximity_list(root);
 
   console.log("-------CORRELATION LISTS--------");
-  call_correlation_list(root);
+//  call_correlation_list(root);
 
   console.log("-------EVKLID LISTS--------");
-  call_evklid_list(root);
+//  call_evklid_list(root);
 
-
+call_recommendation_list(root);

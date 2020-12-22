@@ -11,28 +11,15 @@ $(document).ready(function() {
     console.log(wrk_leave);
 
     if(wrk_leave !== undefined){
-      switch(method) {
-        case 'evklid':
-          evklid_list(wrk_leave, root, list);
-        break;
-        case 'tree':
-          proximity_list(wrk_leave, list, 0);
-        break;
-        case 'difference':
-          differences_list(wrk_leave, root, list);
-        break;
-        case 'correl':
-          correlation_list(wrk_leave, root, list);
-        break;
-      }
-
+      recommendation_list(wrk_leave, root, list);
       list.sort((a, b) => a.val > b.val ? 1 : -1);
 
-      let txt="Результат:<br/>";
-      list.forEach(function(item, i, arr){
-        txt = txt+'<br/>'+item.name+': '+item.val;
+      let txt="Вам могут понравиться:<br/>";
+      list.slice(1, 8).forEach(function(item, i, arr){
+        txt = txt+'<br/>'+item.name;
         console.log(item);
       });
+
       $('#res').html(txt);
     }
     else {
