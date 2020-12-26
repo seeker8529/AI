@@ -33,6 +33,6 @@ $(document).ready(function() {
     window.location.href='tree.html';
   });
   $("#back").click(function(){
-    window.location.href='test.html';
+    window.location.href='complex_recomendations.html';
   });
 });

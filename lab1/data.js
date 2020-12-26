@@ -839,4 +839,9 @@ let treedata = {
             ]
         }
     ]
-}
+};
+
+let userdata=[
+    {name: "Nika", history: ["iPhoneXR", "AirPods Pro"], disliked: [], not_interesting: []}
+];
+

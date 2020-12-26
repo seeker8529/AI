@@ -1,5 +1,6 @@
  let width = 5000;
  let data = treedata;
+ let u_data = userdata;
  let list_t = [];
  var sum = 0;
  var count = 0;
@@ -36,6 +37,18 @@
    title = '';
 
   return title;
+ }
+
+ //Получает список всех объектов
+  function get_all(tree, list){
+  let t=tree;
+
+  if(Array.isArray(t.children))
+   for(let i=0; i<t.children.length; i++)
+    get_all(t.children[i], list);
+  else{
+   list.push(t.data.name);
+  }
  }
 
  function byField(field) {
@@ -77,7 +90,6 @@
       res+=Math.pow(x_i - y_i, 2);
    }
   }
-
   return Math.sqrt(res);
  }
 
@@ -97,6 +109,7 @@
   }
  }
 
+
   //Получает список объектов, сортированных по евклидову расстоянию для каждого листа
  function call_evklid_list(tree){
   let t=tree;
@@ -110,6 +123,7 @@
    console.log(t.data.name, list);
   }
  }
+
 
  //Находит степень удаленности х от у по дереву
  function count_proximity(x, y){
@@ -184,6 +198,7 @@
 
    return diff_sum;
  }
+
 
  //Считает признаки, которых нет в y, но есть в x
  function count_one_side_differences(x, y, features_x){
@@ -344,6 +359,62 @@
  function recommend_coeff(x,y){
   return ((-10)*correlation(x,y,root) + 8*count_differences(x,y) + 0.0001*evklid(x,y) + 5*count_proximity(x,y));
  }
+
+
+ function find_common(list1, list2, res){
+
+  //Для каждого элемента листа 1
+  for(let i = 0; i < list1.length; i++){
+
+   //Если найдено совпадение - добавить в лист результата или увеличить его значение
+   let i_2=list2.findIndex(el => el.name === list1[i].name);
+   if (list2[i_2]!=undefined){
+    let i_r = res.findIndex(el => el.name === list1[i].name)
+    if (res[i_r]!=undefined)
+     res[i_r].val = res[i_r].val + 1;
+    else
+     res.push({name: list1[i].name, val: 1});
+   }
+  }
+ }
+
+ function del_el(list, name){
+  return list.filter(item => item.name !== name);
+ }
+
+ function get_common_recomendations(list_of_list){
+  let top_list=[];
+  let bottom_list=[];
+
+  //Для каждого листа из списка
+  for(let i=0; i<list_of_list.length; i++){
+
+   //Перебираем все остальные листы, начиная с текущего
+   for(let j=i+1; j<list_of_list.length; j++){
+
+    //Ищем одинаковые, составляем верхушку рекомендации
+    find_common(list_of_list[i], list_of_list[j], top_list);
+   }
+   bottom_list = bottom_list.concat(list_of_list[i]);
+  }
+
+  //Сортируем пересекающиеся рекомендации в порядке убывания (чем больше значение, тем чаще встр => выше в списке)
+  top_list.sort((a, b) => a.val < b.val ? 1 : -1);
+  console.log("TOP", top_list);
+
+  //Добавляем к ним остальные списки, в порядке их оценки
+  let common=[];
+
+  find_common(bottom_list, top_list, common);
+  bottom_list = bottom_list.filter(x => !common.some(y => x.name === y.name));
+
+  bottom_list.sort((a, b) => a.val > b.val ? 1 : -1);
+  top_list = top_list.concat(bottom_list);
+
+  return top_list;
+ }
+
+
 
   var bodySelection = d3.select("body");
   var svg = bodySelection.append("svg")

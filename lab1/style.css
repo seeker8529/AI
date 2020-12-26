@@ -52,6 +52,12 @@ input{
     left: 200px;
 }
 
+.sub_main{
+    position: absolute;
+    top: 50px;
+    left: 100px;
+}
+
 .result{
     position: absolute;
     top: 100px;
@@ -67,3 +73,18 @@ input{
 .tree   { z-index: 100; }
 .back   { z-index: 10; }
 
+/*.recomendation {
+	overflow: hidden;
+	position: relative;
+}*/
+
+.recomendation.hide:after{
+	content: "";
+	display: block;
+	height: 1000px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 75%)
+}
