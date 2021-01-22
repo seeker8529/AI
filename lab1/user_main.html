@@ -17,7 +17,7 @@
 
  </head>
  <body>
- <div class="main">
+ <div class="main" id="first">
      <div class="user_header">
         <form>
           <div class="form-group">
@@ -36,12 +36,32 @@
 
      <div class="liked" id="liked"> </div>
      <div class="disliked" id="disliked"> </div>
-
-     <div class="buttom" id="accept_choice">
-         <button id="accept_choice_btn" class="btn btn-primary" > Найти похожие товары </button>
+     
+     <div class="buttom" id="save">
+         <button id="accept_choice_btn" class="btn btn-success" > Сохранить </button>
      </div>
 
-     <div id="recoms"> </div>
+     <div class="buttom_1" id="accept_choice">
+         <button id="accept_choice_btn" class="btn btn-primary" > Показать рекомендации </button>
+     </div>
+     
+     <div class="buttom_2" id="save_history">
+         <button id="accept_choice_btn" class="btn btn-primary" > Перейти к выбору </button>
+     </div>
+
+ </div>
+ <div class="container" id="second">
+   <!--<div class="button">Посчитать близость</div>-->
+   <div class="main">
+    <div class="form-group">
+       <input type="input" class="form-control" name="leave" placeholder="Введите название товара">
+
+       <div class="form-group"> <button id="go_button" class="btn btn-primary"> Выбрать товар </button>
+       <button id="get_tree_button" class="btn btn-success" > Посмотреть дерево </button> </div>
+       </div>
+       <div><p id="res"></p></div>
+
+   </div>
  </div>
  </body>
 </html>

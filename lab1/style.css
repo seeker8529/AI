@@ -92,6 +92,19 @@ position:absolute;
 
 }
 
+.buttom_1{
+top: 1750px;
+position:absolute;
+left:150px;
+}
+
+.buttom_2{
+top: 1750px;
+position:absolute;
+left:388px;
+height:100px;
+}
+
 /*.recomendation {
 	overflow: hidden;
 	position: relative;

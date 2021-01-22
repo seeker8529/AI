@@ -414,6 +414,34 @@
   return top_list;
  }
 
+ function get_by_history_2(recoms, hist_recoms){
+  var res_list = recoms.slice(1,5);
+  
+  res_list = res_list.concat(hist_recoms.slice(1,5));
+
+  return res_list;
+ }
+ 
+ function get_by_history(recoms, hist_recoms){
+  var res_list=[];
+  
+  //Get list of lists of tops
+  console.log(res_list);
+  console.log(hist_recoms);
+  res_list = recoms.slice(1,10);
+  console.log("HH");
+  console.log(res_list);
+  res_list.push(hist_recoms.slice(1,10));
+  console.log(res_list);
+  
+  //Found commons in tops
+  var common_list = get_common_recomendations(res_list);
+  
+  res_list = recoms.slice(1,7);
+  res_list = res_list.concat(common_list.slice(1,5));
+
+  return res_list;
+ }
 
 
   var bodySelection = d3.select("body");
