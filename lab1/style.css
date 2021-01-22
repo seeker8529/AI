@@ -105,6 +105,25 @@ left:388px;
 height:100px;
 }
 
+.select{
+top: 100px;
+position:absolute;
+
+}
+
+.select_1{
+top: 100px;
+position:absolute;
+left:130px;
+}
+
+.select_2{
+top: 100px;
+position:absolute;
+left:300px;
+}
+
+
 /*.recomendation {
 	overflow: hidden;
 	position: relative;
