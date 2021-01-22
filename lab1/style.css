@@ -73,6 +73,25 @@ input{
 .tree   { z-index: 100; }
 .back   { z-index: 10; }
 
+.liked{
+width:330px;
+height:300px;
+position:absolute;
+}
+
+.disliked{
+width:525px;
+height:300px;
+position:absolute;
+left:340px;
+}
+
+.buttom{
+top: 1750px;
+position:absolute;
+
+}
+
 /*.recomendation {
 	overflow: hidden;
 	position: relative;
