@@ -105,17 +105,17 @@ $(document).ready(function() {
         local_recom_list = del_el(local_recom_list, checked[i]);
     }
     
-    if (recom_list.length==0){
+    if (recom_list.length!=0){
     
      for (let i=0; i<checked.length; i++){
         recom_list = del_el(recom_list, checked[i]);
      }
 
      local_recom_list = get_by_history(local_recom_list, recom_list);
-      
-     for (let i=0; i<disliked.length; i++){
-        local_recom_list = del_el(local_recom_list, disliked[i]);
-      }
+    }
+    
+    for (let i=0; i<disliked.length; i++){
+       local_recom_list = del_el(local_recom_list, disliked[i]);
     }
     
    local_recom_list = local_recom_list.slice(1,20);
@@ -245,9 +245,10 @@ $(document).ready(function() {
       recommendation_list(wrk_leave, root, list);
       list.sort((a, b) => a.val > b.val ? 1 : -1);
       
-      list = get_by_history(list, recom_list);
-      
-      console.log(list);
+    
+      if (recom_list.length!=0){
+      	list = get_by_history(list, recom_list);
+      }
       
       list = del_el(list, wrk_leave.name);
       
@@ -260,7 +261,6 @@ $(document).ready(function() {
         txt = txt+'<br/>'+item.name;
       });
       
-
       $('#res').html(txt);
     }
     else {
