@@ -6,6 +6,7 @@ $(document).ready(function() {
   $('#select_parametric').hide();
   $('#save').hide();
   $('#second').hide();
+  $('#third').hide();
   
   var name = '';
   var recom_list = [];
@@ -130,13 +131,8 @@ $(document).ready(function() {
      txt = txt+'<br/>'+item.name;
    });
    
-
    $('#liked').html(txt);
-   //$('#first').hide();
-   //$('.liked').hide();
    $('#disliked').hide();
-  
-  
 
    });
    
@@ -202,8 +198,6 @@ $(document).ready(function() {
    
   $("#select_several").click(function(){ 
   
-   $('#liked').show();
-  
       let list = [];
       get_all(root, list);
 
@@ -221,6 +215,7 @@ $(document).ready(function() {
             '</div>';
       });
       
+    $('#liked').show();  
     $('#liked').html(txt);
 	$('#accept_choice').show();
 	$('#disliked').hide;
@@ -270,8 +265,57 @@ $(document).ready(function() {
         $('#res').html(unsuccesfull);
     }
   });  
-   
-   
-   
+  
+  $('#select_parametric').click(function () {
+  	$('#third').show();
+  	$('#select_one').hide();
+    $('#select_several').hide();
+  	$('#select_parametric').hide();
+  	$('#fourth').show();
+  	
+  });
+  
+  
+  $('#submit_params').click(function () {
+  
+  	let maker_name = $('input[name="maker"]:checked').val();
+  	var item_name = $('input[name="type"]:checked').val();
+  	var price = $('input[name="price"]:checked').val();
+  	var max_price = 0;
+  
+  
+  	switch(price) {
+    	case '20':
+        	max_price = 20000;
+    	break;
+    	case '50':
+        	max_price = 50000;
+    	break;
+    	case '80':
+        	max_price = 80000;
+    	break;
+    	case '300':
+        	max_price = 200000;
+    	break;
+    }
+  
+  	var list=get_range_list(root, disliked, maker_name, item_name, max_price);
+  	
+  	for (let i=0; i<disliked.length; i++){
+        list = del_el(list, disliked[i]);
+    }
+  
+    let txt="Мы отобрали для вас вот такие товары:<br/>";
+    
+    list.forEach(function(item, i, arr){
+        txt = txt+'<br/>'+item.name+'\t'+item.price;
+      });  
+      
+    $('#liked').show();
+    $('#liked').html(txt);
+    $('#submit_params').hide;
+    $('#third').hide();
+
+});
 });
 

@@ -426,13 +426,8 @@
   var res_list=[];
   
   //Get list of lists of tops
-  console.log(res_list);
-  console.log(hist_recoms);
   res_list = recoms.slice(1,10);
-  console.log("HH");
-  console.log(res_list);
   res_list.push(hist_recoms.slice(1,10));
-  console.log(res_list);
   
   //Found commons in tops
   var common_list = get_common_recomendations(res_list);
@@ -442,6 +437,62 @@
 
   return res_list;
  }
+ 
+ 
+ //Создает список рекомендаций с учетом параметров и отметок "не нравится"
+ function get_range_list(tree, disliked, maker_name, item_name, max_price) {
+  var list=[];
+
+  set_range_list(tree, list, maker_name, item_name, max_price);
+
+  list.sort((a, b) => a.range>b.range ? -1 : 1);
+  
+  console.log(list);
+  
+  var res = list.filter(el => disliked.findIndex(function (element, index, array) {
+                                return (element == el.name) }));
+  return res;
+}
+ 
+ //Получаем список - имя товара и его ранг. Чем больше ранг, тем более подходящ товар к запросу
+ function set_range_list(tree, list, maker_name, item_name, max_price){
+ 
+ var t=tree;
+ let range_diff, cost;
+
+ //Проходим по всему дереву
+ if(Array.isArray(t.children))
+    for(let i=0; i<t.children.length; i++)
+      set_range_list(t.children[i], list, maker_name, item_name, max_price);
+ else{
+  range_diff=0;
+
+  if ((maker_name !== t.parent.data.name) && (maker_name !== t.parent.parent.data.name)) {
+    range_diff -= 400;
+  }
+  if ((item_name !== t.parent.parent.data.name) && (item_name !== t.parent.parent.parent.data.name)) {
+    range_diff -= 900;
+  }
+  
+  console.log(max_price, t.data.price);
+  
+  //Если цена больше заданной - штрафуем на разницу, иначе - тоже штрафуем, но совсем немного
+  if(max_price<t.data.price){
+    range_diff -= (t.data.price - max_price)/80;
+  }
+  else{
+  	range_diff += (t.data.price - max_price)/3000;
+  	console.log(range_diff, t.data.name);
+  }
+  	
+  	
+  
+  //Учитываем рейтинг
+  //range_diff -= (10-t.data.rating)*10;
+  
+  list.push({name:t.data.name, range:range_diff, price:t.data.price});
+  }  
+}
 
 
   var bodySelection = d3.select("body");
@@ -585,22 +636,5 @@
     .text(d => get_atr(d.data.is_vacuum, "Ваккуумные:"))
   .clone(true).lower()
     .attr("stroke", "white");
-
-
-  console.log("------- avg --------");
-//  console.log(find_avg("price", root));
-
-
-  console.log("-------DIFFERENCES LISTS--------");
-//  call_differences_list(root);
-
-  console.log("-------PROXIMITY LISTS--------");
-//  call_proximity_list(root);
-
-  console.log("-------CORRELATION LISTS--------");
-//  call_correlation_list(root);
-
-  console.log("-------EVKLID LISTS--------");
-//  call_evklid_list(root);
 
 call_recommendation_list(root);
